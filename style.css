@@ -1,0 +1,181 @@
+@import url(reset.css);
+@font-face {
+  font-family: "Gilroy"; /*semibold*/
+  src: url("fonts/2477466a40fb101ed7c72141cc603a92/fonts/gilroy-semibold.ttf") format('truetype'),
+    url("fonts/2477466a40fb101ed7c72141cc603a92/fonts/gilroy-semibold.woff") format('woff'),
+    url("fonts/2477466a40fb101ed7c72141cc603a92/fonts/gilroy-semibold.woff2") format('woff2');
+  font-style: normal;
+}
+@font-face {
+	font-family: 'Gilroy-Bold';
+	src: 		url('fonts/a67167422ba63398c3b180ee9395860e/fonts/gilroy-bold.woff2') format('woff2'), /* Super Modern Browsers */
+		url('fonts/a67167422ba63398c3b180ee9395860e/fonts/gilroy-bold.woff') format('woff'), /* Firefox >= 3.6, any other modern browser */
+		url('fonts/a67167422ba63398c3b180ee9395860e/fonts/gilroy-bold.ttf') format('truetype'); /* Safari, Android, iOS */
+		
+}
+@font-face {
+  font-family: 'Gilroy-Regular';
+  src: url('fonts/56b4eb62b094bf586ae1ae287ed2725c/fonts/gilroy-regular.ttf') format('truetype'),
+     url('fonts/56b4eb62b094bf586ae1ae287ed2725c/fonts/gilroy-regular.woff') format('woff'),
+     url('fonts/56b4eb62b094bf586ae1ae287ed2725c/fonts/gilroy-regular.woff2') format('woff2');
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.col {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 50vh;
+  position: relative;
+}
+
+.aqua {
+  background: #eef7ff;
+}
+.wrap {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+.row {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  display: grid;
+  gap: 107px;
+  grid-template-columns: 800px auto;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "b a a"
+    "b c c";
+}
+.slider-grid {
+  grid-area: b;
+}
+
+.title-top {
+  grid-area: a;
+  width: 793px;
+  height: 140px;
+}
+
+.title-bottom {
+  grid-area: c;
+  height: 391px;
+  display: flex;
+  align-items: center;
+  margin-top: 66px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: repeat(2, auto);
+  
+}
+
+.h2 {
+  white-space: nowrap;
+  font-size: 40px;
+  line-height: normal;
+  letter-spacing: 0em;
+  font-family: "Gilroy", sans-serif;
+}
+
+.p-b-42 {
+  padding-bottom: 42px;
+}
+.p-b-20 {
+  padding-bottom: 20px;
+}
+
+.f-s-24 {
+  font-size: 24px;
+  line-height: 31px;
+}
+
+.title-font {
+  line-height: 19px;
+  letter-spacing: 0em;
+  font-weight: 300;
+  display: block;
+}
+.title {
+  font-family: "Gilroy-Regular", sans-serif;
+  margin: 10px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto auto;
+}
+
+.color-333333 {
+  color: #333333;
+}
+.d-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.color-555555 {
+  color: #555555;
+}
+.color-DC0306 {
+  color: #dc0306;
+}
+.Gilroy-Bold {
+  font-family: "Gilroy-Bold", sans-serif;
+  font-weight: 100;
+}
+.wrapper {
+  width: 100%;
+  height: 50vh;
+}
+.slider {
+  background: gray;
+  width: inherit;
+  height: inherit;
+  box-shadow: 0 0 20px #00000057;
+  overflow: hidden;
+  position: relative;
+}
+
+.slides {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0;
+  transform: scale(1.5);
+  transition: all 0.4s;
+}
+
+.slide1 {
+  background: url(img/car1.png) no-repeat center/cover;
+}
+.slide2 {
+  background: url(img/car2.jpg) no-repeat center/cover;
+}
+.slide3 {
+  background: url(img/car3.jpg) no-repeat center/cover;
+}
+.slide4 {
+  background: url(img/car4.jpg) no-repeat center/cover;
+}
+
+#slide1:checked ~ .slider > .slide1,
+#slide2:checked ~ .slider > .slide2,
+#slide3:checked ~ .slider > .slide3,
+#slide4:checked ~ .slider > .slide4 {
+  opacity: 1;
+  z-index: 1;
+  transform: scale(1);
+}
