@@ -1,0 +1,51 @@
+body{
+    background-color: aquamarine;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.wrapper {
+    width: 50%;
+    height: 50vh;
+    
+}
+.slider {
+    background: gray;
+    width: inherit;
+    height: inherit;
+    box-shadow: 0 0 20px #00000057;
+    overflow: hidden;
+    position: relative;
+}
+
+.slides {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0;
+    transform: scale(1.5);
+    transition: all .4s;
+}
+
+.slide1 {
+    background: url(img/car1.png) no-repeat center/cover;
+}
+.slide2 {
+    background: url(img/car2.jpg) no-repeat center/cover;
+}
+.slide3 {
+    background: url(img/car3.jpg) no-repeat center/cover;
+}
+.slide4 {
+    background: url(img/car4.jpg) no-repeat center/cover;
+}
+
+#slide1:checked~.slider>.slide1, #slide2:checked~.slider>.slide2, 
+#slide3:checked~.slider>.slide3, #slide4:checked~.slider>.slide4  {
+    opacity: 1;
+    z-index: 1;
+    transform: scale(1);
+}
+
