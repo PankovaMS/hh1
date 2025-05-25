@@ -1,0 +1,32 @@
+node_modules/
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Сборщики и временные файлы
+*.log
+*.tmp
+.cache/
+.parcel-cache/
+*.local
+*.env
+.env.*
+
+# Mac специфическое
+Icon?
+._*
+
+# Файлы шрифтов и изображений, если собираются автоматически
+fonts/
+images/generated/
