@@ -281,7 +281,8 @@ input {
     max-width: 100%;
     word-wrap: break-word;
     text-align: center;
-    inset: 0;
+    padding-top: 20px;
+    color: #555555;
   }
   
 }
