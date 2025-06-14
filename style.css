@@ -30,57 +30,7 @@
       format("woff2");
 }
 
-.wrap {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  overflow: hidden;
-  margin-top: 15%;
-  background: white;
-}
-.grd {
-  position: relative;
-  top: 0;
-  right: auto;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-}
-label {
-  cursor: pointer;
-}
-.controls {
-  display: flex;
-  justify-content: center; /* по горизонтали */
-  align-items: center;     /* по вертикали, если нужна высота */
-  gap: 12px;               /* расстояние между label'ами */
-  height: 40px;            /* если нужно задать высоту */
-}
-.box1 {
-grid-area: 1 / 1 / 5 / 2;
-}
-
-.box2 {
-  grid-area: 1 / 2 / 3 / 4;
-  padding: 20px;
-}
-.bg-aqua {
-   background: #eef7ff;
-}
-.box3 {
-  grid-area: 3 / 2 / 4 / 3;
- 
-}
-.box4 {
-  grid-area: 3 / 3 / 4 / 4;
-}
-.box5 {
-grid-area: 4 / 2 / 4 / 3;
-}
-.box6 {
-grid-area: 4 / 3 / 4 / 4;
-}
+/* FONTS */
 
 .h2 {
   font-family: "Gilroy", sans-serif;
@@ -93,9 +43,10 @@ grid-area: 4 / 3 / 4 / 4;
 .p-b-42 {
   padding-bottom: 42px;
 }
+
 .f-s-24 {
   font-family: "Gilroy-Regular", sans-serif;
-  font-size: 18px;
+  font-size: clamp(18px, 4vw, 24px);
   line-height: 28px;
   color: #555555;
   margin-bottom: 16px;
@@ -105,31 +56,68 @@ grid-area: 4 / 3 / 4 / 4;
   font-family: "Gilroy-Regular", sans-serif;
 }
 
+.number {
+  font-family: "Gilroy-Bold", sans-serif;
+  color: #dc0306;
+}
+
+.title {
+  font-family: "Gilroy-Bold", sans-serif;
+  color: #555555;
+  font-size: clamp(16px, 3vh, 18px);
+  margin-bottom: 20px;
+}
+
+.desc {
+  font-family: "Gilroy-Regular", sans-serif;
+  color: #555555;
+  font-size: 14px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+/* SLIDER */
+
 .wrapper {
-  width: 100%;
-  min-width: auto;
-  margin: 0 auto;
-  height: 50vh;
-}
-.slider {
-  background: gray;
-  width: inherit;
-  height: inherit;
-  box-shadow: 0 0 20px #00000057;
-  overflow: hidden;
   position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 50px auto 0;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  max-height: 500px;
 }
-input {
-  display: none;
-}
-.slides {
+
+.slider {
+  background-color: #ddd;
+  overflow: hidden;
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+.wrapper > input {
+  display: none;
+}
+
+.slides {
+  height: 100%;
   opacity: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 0;
+  -webkit-transform: scale(1.5);
+  -moz-transform: scale(1.5);
+  -o-transform: scale(1.5);
   transform: scale(1.5);
-  transition: all 0.4s;
+  -webkit-transition: transform ease-in-out 0.5s, opacity ease-in-out 0.5s;
+  -moz-transition: transform ease-in-out 0.5s, opacity ease-in-out 0.5s;
+  -o-transition: transform ease-in-out 0.5s, opacity ease-in-out 0.5s;
+  transition: transform ease-in-out 0.5s, opacity ease-in-out 0.5s;
 }
 
 .slide1 {
@@ -144,251 +132,195 @@ input {
 .slide4 {
   background: url(img/car4.jpg) no-repeat center/cover;
 }
+.slide5 {
+  background: url(http://habrastorage.org/files/53c/ff6/c1c/53cff6c1caf842368c70b8ef892d8402.jpg) no-repeat center/cover;
+}
+
+.wrapper .controls {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+.wrapper label {
+  margin: 25px 12px 0 16px;
+  cursor: pointer;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  position: relative;
+  border-radius: 50%;
+  background: transparent;
+  transition: background 0.5s ease-in-out;
+}
+
+.wrapper label:after {
+  border: 2px solid #ddd;
+  content: " ";
+  display: block;
+  height: 12px;
+  left: -4px;
+  position: absolute;
+  top: -4px;
+  width: 12px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+
+
+.wrapper label:hover,
+#slide1:checked ~ .controls label:nth-of-type(1),
+#slide2:checked ~ .controls label:nth-of-type(2),
+#slide3:checked ~ .controls label:nth-of-type(3),
+#slide4:checked ~ .controls label:nth-of-type(4),
+#slide5:checked ~ .controls label:nth-of-type(5) {
+  background: #ddd;
+}
 
 #slide1:checked ~ .slider > .slide1,
 #slide2:checked ~ .slider > .slide2,
 #slide3:checked ~ .slider > .slide3,
-#slide4:checked ~ .slider > .slide4 {
+#slide4:checked ~ .slider > .slide4,
+#slide5:checked ~ .slider > .slide5 {
   opacity: 1;
   z-index: 1;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -o-transform: scale(1);
   transform: scale(1);
 }
 
-.card {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 16px;
-}
+/* POSITION */
 
-.number {
-  font-family: "Gilroy-Bold", sans-serif;
-  color: #dc0306;
-}
-
-.content {
+.box2,
+.box3,
+.box4,
+.box5,
+.box6 {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  text-align: center;
+  margin: 10px;
+  z-index: 1;
 }
 
-.title {
-  font-family: "Gilroy-Bold", sans-serif;
-  color: #555555;
-  font-size: 16px;
-  margin-bottom: 20px;
+.box2 {
+  margin-top: 10%;
 }
 
-.desc {
-  font-family: "Gilroy-Regular", sans-serif;
-  color: #555555;
-  font-size: 14px;
-  line-height: 1.4;
-  white-space: nowrap;
+/* @MEDIA */
+@media (max-width: 575px) {
 
-}
-@media (max-width: 1920px) {
-  .controls {
-  display: flex;
-  justify-content: center; /* по горизонтали */
-  align-items: center;     /* по вертикали, если нужна высота */
-  gap: 12px;               /* расстояние между label'ами */
-  height: 40px;            /* если нужно задать высоту */
-}
-}
-
-/* @media (max-width: 1200px) { (standart)
-  
-} */
-
-@media (max-width: 1024px) {
-  .slider {
-    width: 100%;
-    height: 100vh;
-    margin-bottom: 20%;
+  .bg-aqua {
+    background: #eef7ff;
   }
+}
+@media (max-width: 767.98px) {
+
+  .bg-aqua {
+    background: #eef7ff;
+  }
+}
+
+@media (min-width: 767.98px) {
+
+  .bg-aqua {
+    background: #eef7ff;
+  }
+}
+
+
+
+@media (min-width: 991.98px) {
   .wrap {
-    margin-top: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
   }
-    .grd {
-    position: static;
+  .grd::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+    background: #eef7ff;
+    z-index: 0;
+  }
+  .grd {
+    position: relative;
+    top: 0;
+    right: auto;
+    z-index: 1;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: 10px;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
   }
-  label {
-  cursor: pointer;
-}
-.controls {
-  display: flex;
-  justify-content: center; /* по горизонтали */
-  align-items: center;     /* по вертикали, если нужна высота */
-  gap: 12px;               /* расстояние между label'ами */
-  height: 40px;            /* если нужно задать высоту */
-}
-}
+  .box1 {
+    grid-area: 1 / 1 / 5 / 2;
+  }
 
-@media (max-width: 1023px) {
- 
-    .grd {
-    position: static;
-    display: flex;
-    flex-direction: column;
-
-  }
-  .slider {
-    height: 100vh;
-    margin: 0 auto;
-     align-items: center;
-    text-align: center;
-    padding: 0;
-  }
   .box2 {
-    margin-top: 35%;
-    text-align: center;
+    grid-area: 1 / 2 / 3 / 4;
+    padding: 20px;
   }
-    .box1,
+
+  .box3 {
+    grid-area: 3 / 2 / 4 / 3;
+  }
+  .box4 {
+    grid-area: 3 / 3 / 4 / 4;
+  }
+  .box5 {
+    grid-area: 4 / 2 / 4 / 3;
+  }
+  .box6 {
+    grid-area: 4 / 3 / 4 / 4;
+  }
   .box2,
   .box3,
   .box4,
   .box5,
   .box6 {
-    grid-column: auto !important;
-    grid-row: auto !important;
-  }
-  .card {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
     padding: 0;
   }
-  .desc {
-  white-space: normal;
-  overflow-wrap: break-word;
-  width: 100%;
+
+.wrapper {
+  max-height: none;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  min-height: 350px;
+  margin-top: 20vh;
+}
+
+  .card {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 16px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
   }
 }
 
-@media (max-width: 767px) {
-  .slider {
-    width: 100%;
-    height: 100vh;
-    margin-top: 0;
-  }
-  .box2 {
-    margin: 35% auto 0 auto;
-    width: clamp(200px, 90vw, 600px);
-    text-align: center;
-    white-space: normal;
-  }
-label {
-  cursor: pointer;
-}
-.controls {
-  display: flex;
-  justify-content: center; /* по горизонтали */
-  align-items: center;     /* по вертикали, если нужна высота */
-  gap: 12px;               /* расстояние между label'ами */
-  height: 40px;            /* если нужно задать высоту */
-}
-  .grd {
-    position: static;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: 10px;
-  }
+
+
+@media (min-width: 1199.98px) {
   .wrap {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: 10px;
-    max-width: 100%;
-    margin-top: 0;
+    margin-top: 10%;
   }
   .wrapper {
-    width: 100%;
-    max-height: 400px;
+    margin-top: 10vh;
   }
-  .desc,
-  .box2 {
-    white-space: normal;
-  }
-
-  .box1,
-  .box2,
-  .box3,
-  .box4,
-  .box5,
-  .box6 {
-    grid-column: auto !important;
-    grid-row: auto !important;
-  }
-.desc {
-      white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  width: 90%;
-  }
-.card {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 8px;
-    
-  }
-}
-
-@media (max-width: 480px) {
-  .slider {
-    width: 100%;
-    height: 100vh;
-    position: relative;
-    margin-bottom: 10px;
-  }
-  .f-s-24 {
-  font-family: "Gilroy-Regular", sans-serif;
-  font-size: 14px;
-  line-height: 17px;
-  color: #555555;
-  margin-bottom: 0px;
-}
-.p-b-42 {
-  padding-bottom: 30px;
-}
-  .wrap {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-  }
-  body {
-    background: white;
-  }
-  .card {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 0;
-  }
-  .desc {
-  white-space: normal;
-  overflow-wrap: break-word;
-  width: 100%;
-  }
-  .h2 {
-    max-width: 100%;
-    word-wrap: break-word;
-    text-align: center;
-    padding-top: 20px;
-    color: #555555;
-  }
-  
 }
